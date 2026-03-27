@@ -12,8 +12,10 @@ app.get("/", (req, res) => {
     res.json({ message: "Funcionando" });
 });
 
-app.get()
-
+app.get("/clientes", async (req, res) => {
+	const clientes = await db.selectCustomer();
+	res.json(clientes);
+});
 app.listen(port, async () => {
     console.log(`Servidor rodando na porta ${port}`);
 
