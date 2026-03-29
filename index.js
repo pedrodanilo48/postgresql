@@ -32,6 +32,11 @@ app.post("/clients", async (req, res) => {
     res.sendStatus(201);
 });
 
+app.delete("/clients/:id", async (req, res) => {
+    await db.deleteCustomer(req.params.id);
+    res.sendStatus(204);
+});
+
 app.patch("/clients/:id", async (req, res) => {
     await db.updateCustomer(req.params.id, req.body);
     res.sendStatus(200);

@@ -26,6 +26,14 @@ async function selectCustomer(id){
     return res.rows[0];
 }
 
+async function deleteCustomer(id){
+    const client = await connect();
+    const sql = "DELETE FROM clients WHERE id = $1";
+    const values = [id];
+    await client.query(sql, values);
+}
+
+
 async function updateCustomer(id, customer){
     const client = await connect();
     const sql = "UPDATE clients SET nome = $1, email = $2, uf = $3 WHERE id = $4";
@@ -57,4 +65,4 @@ async function setupDatabase(){
     client.release();
     console.log("Estrutura da tabela criada");
 }
-module.exports = { connect, selectCustomer, setupDatabase, insertClient, updateCustomer };
+module.exports = { connect, selectCustomer, setupDatabase, insertClient, updateCustomer, deleteCustomer };
