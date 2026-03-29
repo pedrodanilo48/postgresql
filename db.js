@@ -25,16 +25,12 @@ async function selectCustomer(id){
     return res.rows;
 }
 
-async function setupDatabase(){
+async function updateCustomer(id, customer){
     const client = await connect();
-    const query = `CREATE TABLE IF NOT EXISTS  clients (
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL);`;
-
-    await client.query(query);
+    const sql = "UPDATE clients SET nome = $1, email = $2, uf = $3 WHERE id = $4";
+    const values = [customer.nome, customer.email, customer.uf, id];
+    await client.query(sql, values);
     client.release();
-    console.log("Estrutura da tabela criada");
 }
 
 async function insertClient(customer){
@@ -45,6 +41,7 @@ async function insertClient(customer){
 
 	const res = await client.query(sql, [customer.nome, customer.email, customer.uf]);
 	client.release();
+    return res.rows[0];
 }
 
 async function setupDatabase(){

@@ -24,16 +24,17 @@ app.get("/clients/:id", async (req, res) => {
     }
 });
 
-app.post("/", (req, res) => {
-    res.json({ message: "Funcionando" });
+app.post("/clients", async (req, res) => {
+    console.log(req.body);
+    await db.insertClient(req.body);
+    res.sendStatus(201);
 });
-// No seu index.js
+
 app.get('/clients', async (req, res) => {
     try {
         const conexao = await db.connect();
         const resultado = await conexao.query("SELECT * FROM clients");
         
-        // Isso envia os dados para a tela do navegador
         res.json(resultado.rows); 
     } catch (err) {
         res.status(500).send("Erro ao buscar clientes: " + err.message);
