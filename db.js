@@ -40,6 +40,8 @@ async function setupDatabase(){
 async function insertClient(customer){
 	const client = await connect();
 	const sql = `INSERT INTO clients (nome, email, uf) VALUES ($1, $2, $3) RETURNING *;`
+	//const values = [nome, email, uf];
+    //const res = await client.query(sql, values);  é a mesma coisa que passar os valores diretamente no array
 
 	const res = await client.query(sql, [customer.nome, customer.email, customer.uf]);
 	client.release();
