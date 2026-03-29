@@ -19,9 +19,9 @@ async function connect(){
     return pool.connect();
 }
 
-async function selectCustomer(){
+async function selectCustomer(id){
     const client = await connect();
-    const res = await client.query("SELECT * FROM clientes");
+    const res = await client.query("SELECT * FROM clients WHERE id = $1", [id]);
     return res.rows;
 }
 
@@ -37,9 +37,9 @@ async function setupDatabase(){
     console.log("Estrutura da tabela criada");
 }
 
-async function inserClient(nome, email){
+async function insertClient(nome, email){
 	const client = await connect();
-	const sql = `INSERT INTO clients (nome, email) VALUES ($1, $2) RETURNING *;`
+	const sql = `INSERT INTO clients (nome, email, uf) VALUES ($1, $2, $3) RETURNING *;`
 	const values = [nome, email];
 
 	const res = await client.query(sql, values);
@@ -47,4 +47,4 @@ async function inserClient(nome, email){
 	return res.rows[0];
 }
 
-module.exports = { connect, selectCustomer, setupDatabase, inserClient };
+module.exports = { connect, selectCustomer, setupDatabase, insertClient };

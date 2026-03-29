@@ -12,16 +12,17 @@ app.get("/", (req, res) => {
     res.json({ message: "Funcionando" });
 });
 
-app.get("/clientes", async (req, res) => {
-	const clientes = await db.selectCustomer();
-	res.json(clientes);
+app.get("/clients/:id", async (req, res) => {
+	const clients = await db.selectCustomer(req.params.id);
+	res.json(clients);
 });
+
 app.listen(port, async () => {
     console.log(`Servidor rodando na porta ${port}`);
 
     try {
-        const newCustomer = await db.inserClient("Pedro", "pedro@gmail.com");
-        console.log("Novo cliente inserido:", newCustomer);
+        // const newCustomer = await db.insertClient("Pedro", "pedro@gmail.com");
+        // console.log("Novo cliente inserido:", newCustomer);
         // await db.setupDatabase();
         // console.log("Banco de dados configurado");
     } catch (error) {
