@@ -45,7 +45,6 @@ async function insertClient(customer){
 
 	const res = await client.query(sql, [customer.nome, customer.email, customer.uf]);
 	client.release();
-	return res.rows[0];
 }
 
 module.exports = { connect, selectCustomer, setupDatabase, insertClient };
