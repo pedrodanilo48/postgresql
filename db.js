@@ -52,7 +52,8 @@ async function setupDatabase(){
     const query = `CREATE TABLE IF NOT EXISTS  clients (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL);`;
+    email VARCHAR(100) UNIQUE NOT NULL,
+    uf VARCHAR(2) NOT NULL);`;
 
     await client.query(query);
     client.release();
