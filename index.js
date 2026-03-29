@@ -8,16 +8,22 @@ const express = require("express");
 
 const app = express();
 
+app.use(express.json());
+
 app.get("/", (req, res) => {
     res.json({ message: "Funcionando" });
 });
 
 app.get("/clients/:id", async (req, res) => {
-	await db.insertClient(req.body);
-	res.json(clients);
-    res.sendStatus(201);
+    try {
+        await db.insertClient(req.body);
+        res.json(clients);
+        res.sendStatus(201);
+    } catch (err) {
+        res.status(500).json({ erro: err.message });
+    }
 });
-app.use(express.json());
+
 app.post("/", (req, res) => {
     res.json({ message: "Funcionando" });
 });
