@@ -16,6 +16,10 @@ app.get("/clients/:id", async (req, res) => {
 	const clients = await db.selectCustomer(req.params.id);
 	res.json(clients);
 });
+app.use(express.json());
+app.post("/", (req, res) => {
+    res.json({ message: "Funcionando" });
+});
 
 app.listen(port, async () => {
     console.log(`Servidor rodando na porta ${port}`);
