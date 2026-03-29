@@ -13,8 +13,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/clients/:id", async (req, res) => {
-	const clients = await db.selectCustomer(req.params.id);
+	await db.insertClient(req.body);
 	res.json(clients);
+    res.sendStatus(201);
 });
 app.use(express.json());
 app.post("/", (req, res) => {
