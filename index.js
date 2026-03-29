@@ -25,9 +25,13 @@ app.get("/clients/:id", async (req, res) => {
 });
 
 app.post("/clients", async (req, res) => {
-    console.log(req.body);
     await db.insertClient(req.body);
     res.sendStatus(201);
+});
+
+app.patch("/clients/:id", async (req, res) => {
+    await db.updateCustomer(req.params.id, req.body);
+    res.sendStatus(200);
 });
 
 app.get('/clients', async (req, res) => {

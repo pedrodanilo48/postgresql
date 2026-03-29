@@ -56,4 +56,4 @@ async function setupDatabase(){
     client.release();
     console.log("Estrutura da tabela criada");
 }
-module.exports = { connect, selectCustomer, setupDatabase, insertClient };
+module.exports = { connect, selectCustomer, setupDatabase, insertClient, updateCustomer };
