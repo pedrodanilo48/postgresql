@@ -37,12 +37,11 @@ async function setupDatabase(){
     console.log("Estrutura da tabela criada");
 }
 
-async function insertClient(nome, email){
+async function insertClient(customer){
 	const client = await connect();
 	const sql = `INSERT INTO clients (nome, email, uf) VALUES ($1, $2, $3) RETURNING *;`
-	const values = [nome, email];
 
-	const res = await client.query(sql, values);
+	const res = await client.query(sql, [customer.nome, customer.email, customer.uf]);
 	client.release();
 	return res.rows[0];
 }
