@@ -22,7 +22,8 @@ async function connect(){
 async function selectCustomer(id){
     const client = await connect();
     const res = await client.query("SELECT * FROM clients WHERE id = $1", [id]);
-    return res.rows;
+    client.release();
+    return res.rows[0];
 }
 
 async function updateCustomer(id, customer){

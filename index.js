@@ -14,11 +14,14 @@ app.get("/", (req, res) => {
     res.json({ message: "Funcionando" });
 });
 
-app.get("/clients/:id", async (req, res) => {
+app.get('/clients/:id', async (req, res) => {
+    const id = req.params.id; // Pega o número que você digitar na URL
     try {
-        await db.insertClient(req.body);
-        res.json(clients);
-        res.sendStatus(201);
+        const customer = await db.selectCustomer(id);
+        if (!customer) {
+            return res.status(404).json({ mensagem: "Cliente não encontrado" });
+        }
+        res.json(customer);
     } catch (err) {
         res.status(500).json({ erro: err.message });
     }
