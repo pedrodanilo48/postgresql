@@ -15,7 +15,8 @@
     </form>
 
     <h2>Lista de Clientes</h2>
-    <ul id="lista"></ul> //essa também é conectada com o backend, onde a lista de clientes é exibida dinamicamente
+    <ul id="lista"></ul>
+    <!-- essa também é conectada com o backend, onde a lista de clientes é exibida dinamicamente -->
 
     <script>
         const form = document.getElementById('clientForm'); //atribui o formulário a uma variável para facilitar o acesso
@@ -25,7 +26,7 @@
         async function carregarClientes() {
             const response = await fetch('http://localhost:3000/clients');
             const clientes = await response.json();
-            lista.innerHTML = clientes.map(cliente => `<li>${cliente.nome} - ${cliente.uf}</li>`).join('');
+            lista.innerHTML = clientes.map(cliente => `<li>${cliente.nome} - ${cliente.uf} - ${cliente.email}</li>`).join('');
         }
 
         // FUNÇÃO PARA ENVIAR CLIENTE (POST)
