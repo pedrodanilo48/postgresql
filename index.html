@@ -25,7 +25,7 @@
         async function carregarClientes() {
             const response = await fetch('http://localhost:3000/clients');
             const clientes = await response.json();
-            lista.innerHTML = clientes.map(c => `<li>${cliente.nome} - ${cliente.uf}</li>`).join('');
+            lista.innerHTML = clientes.map(cliente => `<li>${cliente.nome} - ${cliente.uf}</li>`).join('');
         }
 
         // FUNÇÃO PARA ENVIAR CLIENTE (POST)
