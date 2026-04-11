@@ -22,6 +22,22 @@
         const form = document.getElementById('clientForm'); //atribui o formulário a uma variável para facilitar o acesso
         const lista = document.getElementById('lista');
 
+        // No seu index.html, dentro da função carregarClientes
+lista.innerHTML = clientes.map(cliente => `
+    <li>
+        ${cliente.nome} - ${cliente.uf}
+        <button onclick="deletar(${cliente.id})">Excluir</button>
+    </li>
+`).join('');
+
+// Nova função para o botão funcionar
+async function deletar(id) {
+    if (confirm("Tem certeza que deseja excluir?")) {
+        await fetch(`http://localhost:3000/clients/${id}`, { method: 'DELETE' });
+        carregarClientes(); // Atualiza a lista na hora!
+    }
+}
+
         // FUNÇÃO PARA BUSCAR CLIENTES (GET)
         async function carregarClientes() {
             const response = await fetch('http://localhost:3000/clients');
