@@ -33,6 +33,12 @@ async function deleteCustomer(id){
     await client.query(sql, values);
 }
 
+async function deleteClient(id) {
+    const client = await connect();
+    const sql = 'DELETE FROM clients WHERE id = $1;';
+    await client.query(sql, [id]);
+    client.release();
+}
 
 async function updateCustomer(id, customer){
     const client = await connect();
