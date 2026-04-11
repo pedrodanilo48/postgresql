@@ -23,12 +23,6 @@
         const lista = document.getElementById('lista');
 
         // No seu index.html, dentro da função carregarClientes
-lista.innerHTML = clientes.map(cliente => `
-    <li>
-        ${cliente.nome} - ${cliente.uf}
-        <button onclick="deletar(${cliente.id})">Excluir</button>
-    </li>
-`).join('');
 
 // Nova função para o botão funcionar
 async function deletar(id) {
@@ -43,6 +37,13 @@ async function deletar(id) {
             const response = await fetch('http://localhost:3000/clients');
             const clientes = await response.json();
             lista.innerHTML = clientes.map(cliente => `<li>${cliente.nome} - ${cliente.uf} - ${cliente.email}</li>`).join('');
+
+            lista.innerHTML = clientes.map(cliente => `
+    <li>
+        ${cliente.nome} - ${cliente.uf}
+        <button onclick="deletar(${cliente.id})">Excluir</button>
+    </li>
+`).join('');
         }
 
         // FUNÇÃO PARA ENVIAR CLIENTE (POST)
