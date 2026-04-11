@@ -34,12 +34,13 @@ async function deleteCustomer(id){
     client.release();
 }
 
-async function updateCustomer(id, customer){
+async function updateCustomer(id, customer) {
     const client = await connect();
-    const sql = "UPDATE clients SET nome = $1, email = $2, uf = $3 WHERE id = $4";
+    const sql = 'UPDATE clients SET nome=$1, email=$2, uf=$3 WHERE id=$4 RETURNING *;';
     const values = [customer.nome, customer.email, customer.uf, id];
-    await client.query(sql, values);
+    const res = await client.query(sql, values);
     client.release();
+    return res.rows[0];
 }
 
 async function insertClient(customer){

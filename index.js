@@ -46,6 +46,19 @@ app.patch("/clients/:id", async (req, res) => {
     res.sendStatus(200);
 });
 
+app.put('/clients/:id', async (req, res) => {
+    const id = req.params.id;
+    try {
+        const atualizado = await db.updateClient(id, req.body);
+        if (!atualizado) {
+            return res.status(404).json({ mensagem: "Cliente não encontrado" });
+        }
+        res.json(atualizado);
+    } catch (err) {
+        res.status(500).json({ erro: err.message });
+    }
+});
+
 app.get('/clients', async (req, res) => {
     try {
         const conexao = await db.connect();
