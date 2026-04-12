@@ -46,16 +46,17 @@ app.patch("/clients/:id", async (req, res) => {
     res.sendStatus(200);
 });
 
+// index.js
 app.put('/clients/:id', async (req, res) => {
     const id = req.params.id;
+    const dadosNovos = req.body;
+    
     try {
-        const atualizado = await db.updateClient(id, req.body);
-        if (!atualizado) {
-            return res.status(404).json({ mensagem: "Cliente não encontrado" });
-        }
-        res.json(atualizado);
+        await db.updateClient(id, dadosNovos);
+        res.sendStatus(200); // Envia "OK" para o front-end
     } catch (err) {
-        res.status(500).json({ erro: err.message });
+        console.error(err);
+        res.status(500).send("Erro ao atualizar");
     }
 });
 
@@ -69,6 +70,7 @@ app.get('/clients', async (req, res) => {
         res.status(500).send("Erro ao buscar clientes: " + err.message);
     }
 });
+
 app.listen(port, async () => {
     console.log(`Servidor rodando na porta ${port}`);
 
