@@ -52,7 +52,7 @@ app.put('/clients/:id', async (req, res) => {
     const dadosNovos = req.body;
     
     try {
-        await db.updateClient(id, dadosNovos);
+        await db.updateCustomer(id, dadosNovos);
         res.sendStatus(200); // Envia "OK" para o front-end
     } catch (err) {
         console.error(err);
