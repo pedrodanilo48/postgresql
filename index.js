@@ -3,7 +3,7 @@ require("dotenv").config();
 const port = process.env.PORT
 //process.env servirá para acessar as variáveis de ambiente definidas no arquivo .env
 //process.env não pode ser escrito de outra forma, é uma variável de ambiente global que o Node.js fornece para acessar as variáveis de ambiente do sistema operacional.
-
+//por outro lado, dotenv é uma biblioteca que carrega as variáveis de ambiente de um arquivo .env para process.env, permitindo que você defina suas variáveis de ambiente em um arquivo separado e as acesse facilmente em seu código.
 const db = require("./db");
 
 const express = require("express");
