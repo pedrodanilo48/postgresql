@@ -7,11 +7,11 @@ const port = process.env.PORT
 const db = require("./db");
 
 const express = require("express");
-
+// Express é um framework web para Node.js que facilita a criação de servidores e APIs. Ele fornece uma estrutura simples e flexível para lidar com rotas, requisições e respostas HTTP, além de oferecer suporte a middleware para adicionar funcionalidades adicionais ao seu aplicativo.
 const app = express();
-
+//ao criar uma instância do Express, você pode usar o objeto "app" para definir rotas, middleware e outras configurações do servidor. Ele é a base para construir seu aplicativo web usando o Express.
 const cors = require("cors");
-
+// CORS (Cross-Origin Resource Sharing) é um mecanismo de segurança implementado pelos navegadores para controlar o acesso a recursos em um servidor a partir de domínios diferentes. Ele é usado para permitir ou restringir solicitações de recursos entre diferentes origens (domínios) e é essencial para garantir a segurança das aplicações web. O middleware "cors" do Express facilita a configuração das políticas de CORS em seu servidor, permitindo que você defina quais origens têm permissão para acessar seus recursos e quais métodos HTTP são permitidos.
 app.use(cors());
 
 app.use(express.json());
