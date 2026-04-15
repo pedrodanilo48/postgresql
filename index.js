@@ -15,7 +15,7 @@ const cors = require("cors");
 app.use(cors());
 
 app.use(express.json());
-
+//ao usar o middleware express.json(), você pode acessar o corpo da requisição como um objeto JSON
 app.get("/", (req, res) => {
     res.json({ message: "Funcionando" });
 });
