@@ -19,6 +19,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.json({ message: "Funcionando" });
 });
+//req and res são os objetos de requisição e resposta do Express. O req contém informações sobre a requisição feita pelo cliente, como parâmetros, corpo, cabeçalhos, etc. O res é usado para enviar uma resposta de volta ao cliente, permitindo que você defina o status da resposta, o corpo da resposta e outros detalhes.
 
 app.get('/clients/:id', async (req, res) => {
     const id = req.params.id; // Pega o número que você digitar na URL
